@@ -14,7 +14,10 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
+    'sqlite' => [
+        'driver' => 'sqlite',
+        'database' => dirname(__DIR__).'/database/database.sqlite',
+    ],
     'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
