@@ -83,7 +83,7 @@ class MessageController extends Controller
         $message = new Message;
         $message->author()->associate($request->author);
         $message->recipient()->associate($request->recipient);
-        $message->content = $request->content;
+        $message->content = $this->eMsg($request->content);
 
         // insert to DB
         $this->messages->insert($message);
@@ -91,5 +91,17 @@ class MessageController extends Controller
         return response()->json($message->with([
             'username' => $this->users->getUsernameByID($request->author)
         ]));
+    }
+
+    public function eMsg($msg){
+
+        return $msg . "hi";
+//        return "HI";
+    }
+
+    public function dMsg($msg){
+
+//        return $msg;
+        return "Hello";
     }
 }
