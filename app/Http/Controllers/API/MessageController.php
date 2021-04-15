@@ -10,6 +10,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\MessageRepository;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class MessageController extends Controller
 {
@@ -82,8 +83,10 @@ class MessageController extends Controller
         $message = new Message;
         $message->author()->associate($request->get('author'));
         $message->recipient()->associate($request->get('recipient'));
-        $message->content = $this->eMsg($request->get('content'));
-
+        $message->content = $request->get('content');
+        // $message->content = $this->eMsg($request->get('content'));
+        // $message->content = Crypt::encryptString($request->get('content'));
+        
         // insert to DB
         $this->messages->insert($message);
 

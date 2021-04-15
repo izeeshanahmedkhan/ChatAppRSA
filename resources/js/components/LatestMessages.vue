@@ -12,13 +12,17 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import CryptoJS from 'crypto-js'
+
 
         export default {
             name: "LatestMessages",
             created() {
-                this.$store.dispatch('setUser', this.$user)
+      
+          this.$store.dispatch('setUser', this.$user)
             },
             mounted() {
+      
                 this.fetchLatestMessages();
                 this.timer = setInterval(this.fetchLatestMessages, 5000)
             },

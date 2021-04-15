@@ -2,16 +2,21 @@
 
 namespace App;
 
+use GregoryDuckworth\Encryptable\EncryptableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+
+    use EncryptableTrait;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = ['content'];
+
+    protected $encryptable = ['content'];
 
     /**
      * The attributes that should be cast.

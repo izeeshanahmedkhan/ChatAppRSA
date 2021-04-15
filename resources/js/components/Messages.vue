@@ -11,6 +11,7 @@
             name: "Messages",
             created() {
                 this.fetchMessages();
+        
                 this.timer = setInterval(this.fetchMessages, 5000)
             },
             methods: {

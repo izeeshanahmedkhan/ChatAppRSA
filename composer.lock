@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f57004028c0673326d19e6e97f97d3a",
+    "content-hash": "2a9a36739e36e74705adf1f381933c39",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -528,6 +528,48 @@
                 }
             ],
             "time": "2020-04-28T08:47:37+00:00"
+        },
+        {
+            "name": "gregoryduckworth/encryptable",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gregoryduckworth/Encryptable.git",
+                "reference": "dc37b6fb3cf7384a5900865633b52d324daf415a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gregoryduckworth/Encryptable/zipball/dc37b6fb3cf7384a5900865633b52d324daf415a",
+                "reference": "dc37b6fb3cf7384a5900865633b52d324daf415a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GregoryDuckworth\\Encryptable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Duckworth",
+                    "email": "gregoryduckworth@googlemail.com"
+                }
+            ],
+            "description": "A simple trait to make attributes encrypted in the database",
+            "keywords": [
+                "database",
+                "eloquent",
+                "encrypt",
+                "laravel"
+            ],
+            "time": "2020-02-14T17:26:10+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
