@@ -1,6 +1,6 @@
 <template>
     <div class="list-group">
-        <a v-for="latestMessage in latestMessages" @click="onClick(latestMessage.connected_user_id)" href="#" class="list-group-item list-group-item-action flex-column align-items-start connected-users" data-toggle="list">
+        <a v-for="latestMessage in latestMessages" @click="onClick(latestMessage.connected_user_id)" :key="lastestMessage.id" href="#" class="list-group-item list-group-item-action flex-column align-items-start connected-users" data-toggle="list">
             <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ latestMessage.connected_user }}</h5>
             <small>{{ latestMessage.created_at }}</small>

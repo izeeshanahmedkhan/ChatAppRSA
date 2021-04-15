@@ -8,7 +8,6 @@ use App\User;
 use App\Message;
 use App\Repositories\UserRepository;
 use App\Repositories\MessageRepository;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -81,15 +80,15 @@ class MessageController extends Controller
 
         // create object
         $message = new Message;
-        $message->author()->associate($request->author);
-        $message->recipient()->associate($request->recipient);
-        $message->content = $this->eMsg($request->content);
+        $message->author()->associate($request->get('author'));
+        $message->recipient()->associate($request->get('recipient'));
+        $message->content = $this->eMsg($request->get('content'));
 
         // insert to DB
         $this->messages->insert($message);
 
         return response()->json($message->with([
-            'username' => $this->users->getUsernameByID($request->author)
+            'username' => $this->users->getUsernameByID($request->get('author'))
         ]));
     }
 
