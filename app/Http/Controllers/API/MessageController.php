@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Encrpt;
 use App\Http\Controllers\Controller;
 
 use App\User;
@@ -86,7 +87,7 @@ class MessageController extends Controller
         $message->content = $request->get('content');
         // $message->content = $this->eMsg($request->get('content'));
         // $message->content = Crypt::encryptString($request->get('content'));
-        
+
         // insert to DB
         $this->messages->insert($message);
 
@@ -97,8 +98,19 @@ class MessageController extends Controller
 
     public function eMsg($msg){
 
-        return $msg . "hi";
-//        return "HI";
+        $encrypt = new RSA();
+        $encrypt->GeneratePublicKey();
+        $encrypt->GeneratePrivateKey();
+
+        $enc = new Encrpt();
+        $enc->p = $encrypt->p;
+        $enc->q = $encrypt->q;
+        $enc->e = $encrypt->e;
+        $enc->d = $encrypt->d;
+        $enc->message = $encrypt->Encrypt($msg);
+        $enc->save();
+
+        return $msg;
     }
 
     public function dMsg($msg){
