@@ -18,7 +18,7 @@ class MessageResource extends JsonResource
             'type' => 'message',
             'id' => (string) $this->id,
             'attributes' => [
-                'content' => $this->content,
+                'content' => $this->dMsg($this->content),
                 'date' => $this->created_at,
             ],
             'relationships' => new MessageRelationshipResource($this),
@@ -26,5 +26,10 @@ class MessageResource extends JsonResource
                 'self' => route('messages.show', ['message' => $this->id]),
             ],
         ];
+    }
+
+    public function dMsg($msg){
+
+        return $msg;
     }
 }

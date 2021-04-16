@@ -15,8 +15,7 @@ class CreateEncrptsTable extends Migration
     {
         Schema::create('encrpts', function (Blueprint $table) {
             $table->id();
-            $table->string('p');
-            $table->string('q');
+            $table->string('n');
             $table->string('e');
             $table->string('d');
             $table->string('message');

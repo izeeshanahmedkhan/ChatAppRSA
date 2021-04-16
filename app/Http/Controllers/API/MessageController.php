@@ -52,7 +52,11 @@ class MessageController extends Controller
      */
     public function index(User $user)
     {
-        return response()->json($this->messages->latestForUser($user));
+        $msgs = $this->messages->latestForUser($user);
+        foreach ($msgs as $msg){
+            $msg->content = $this->dMsg($msg->content);
+        }
+        return response()->json($msgs);
     }
 
     /**
@@ -62,7 +66,13 @@ class MessageController extends Controller
      */
     public function show(User $user1, User $user2)
     {
-        return response()->json($this->messages->betweenUsers($user1, $user2));
+
+        $msgs = $this->messages->betweenUsers($user1, $user2);
+        foreach ($msgs as $msg){
+            $msg->content = $this->dMsg($msg->content);
+        }
+        return response()->json($msgs);
+//        return response()->json($this->messages->betweenUsers($user1, $user2));
     }
 
     /**
@@ -84,9 +94,7 @@ class MessageController extends Controller
         $message = new Message;
         $message->author()->associate($request->get('author'));
         $message->recipient()->associate($request->get('recipient'));
-        $message->content = $request->get('content');
-        // $message->content = $this->eMsg($request->get('content'));
-        // $message->content = Crypt::encryptString($request->get('content'));
+        $message->content = $this->eMsg($request->get('content'));
 
         // insert to DB
         $this->messages->insert($message);
@@ -99,23 +107,23 @@ class MessageController extends Controller
     public function eMsg($msg){
 
         $encrypt = new RSA();
-        $encrypt->GeneratePublicKey();
-        $encrypt->GeneratePrivateKey();
-
-        $enc = new Encrpt();
-        $enc->p = $encrypt->p;
-        $enc->q = $encrypt->q;
+        $enc = new Encrpt;
+        $enc->message = $encrypt->generateKeys($msg);
+        $enc->n = $encrypt->n;
         $enc->e = $encrypt->e;
         $enc->d = $encrypt->d;
-        $enc->message = $encrypt->Encrypt($msg);
         $enc->save();
 
-        return $msg;
+        return $enc->id;
     }
+
 
     public function dMsg($msg){
-
-//        return $msg;
-        return "Hello";
+        $id = (int)$msg;
+        $enc = Encrpt::findorFail($id);
+        $encrypt = new RSA();
+        $message = $encrypt->Decrypt($enc);
+        return $message;
     }
+
 }

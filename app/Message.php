@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
 
-    use EncryptableTrait;
+//    use EncryptableTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +16,7 @@ class Message extends Model
      */
     protected $fillable = ['content'];
 
-    protected $encryptable = ['content'];
+//    protected $encryptable = ['content'];
 
     /**
      * The attributes that should be cast.

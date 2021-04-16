@@ -7,7 +7,7 @@ use App\Message;
 use Illuminate\Support\Facades\DB;
 
 class MessageRepository
-{   
+{
     /**
      * Insert a message.
      *
@@ -94,20 +94,20 @@ class MessageRepository
         $latest_sent = Message::where('author_id', $user->id)
                             ->join('users as author','author_id','=', 'author.id')
                             ->join('users as recipient','recipient_id','=', 'recipient.id')
-                            ->select('content', 'messages.created_at', 
-                                DB::raw('recipient_id as connected_user_id'), 
-                                DB::raw('recipient.username as connected_user'), 
-                                DB::raw('author.username as author'), 
+                            ->select('content', 'messages.created_at',
+                                DB::raw('recipient_id as connected_user_id'),
+                                DB::raw('recipient.username as connected_user'),
+                                DB::raw('author.username as author'),
                                 DB::raw('recipient.username as recipient')
                             );
 
         $latest_received = Message::where('recipient_id', $user->id)
                             ->join('users as author','author_id','=', 'author.id')
                             ->join('users as recipient','recipient_id','=', 'recipient.id')
-                            ->select('content', 'messages.created_at', 
-                                DB::raw('author_id as connected_user_id'), 
-                                DB::raw('author.username as connected_user'), 
-                                DB::raw('author.username as author'), 
+                            ->select('content', 'messages.created_at',
+                                DB::raw('author_id as connected_user_id'),
+                                DB::raw('author.username as connected_user'),
+                                DB::raw('author.username as author'),
                                 DB::raw('recipient.username as recipient')
                             );
 
