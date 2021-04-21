@@ -45,7 +45,21 @@
                                 <div class="my-2">
                                     <create-message />
                                 </div>
-                            </div>    
+                            </div>
+{{--                            <div class="row">--}}
+{{--                                <form method="post" id="upload-image-form" enctype="multipart/form-data">--}}
+{{--                                    @csrf--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <input type="file" name="file" class="form-control" id="image-input">--}}
+{{--                                        <span class="text-danger" id="image-input-error"></span>--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="form-group">--}}
+{{--                                        <button type="submit" class="btn btn-success">Upload</button>--}}
+{{--                                    </div>--}}
+
+{{--                                </form>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>

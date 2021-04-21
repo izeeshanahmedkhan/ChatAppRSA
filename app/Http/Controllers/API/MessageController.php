@@ -12,6 +12,7 @@ use App\Repositories\MessageRepository;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Intervention\Image\Facades\Image;
 
 class MessageController extends Controller
 {
@@ -95,7 +96,7 @@ class MessageController extends Controller
         $message->author()->associate($request->get('author'));
         $message->recipient()->associate($request->get('recipient'));
         $message->content = $this->eMsg($request->get('content'));
-
+//
         // insert to DB
         $this->messages->insert($message);
 
@@ -124,6 +125,21 @@ class MessageController extends Controller
         $encrypt = new RSA();
         $message = $encrypt->Decrypt($enc);
         return $message;
+    }
+
+    public function imageStore(Request $request)
+    {
+        $message = Message::where('author_id', auth()->id())->first();
+        $image = $request->file('image');
+        $filename = $image->getClientOriginalName();
+        //Fullsize
+        $image->move(public_path().'/full/',$filename);
+        $image_resize = Image::make(public_path().'/full/'.$filename);
+        //intervention will convert this in base 64
+        $base64Image = Image::make(file_get_contents($image));
+        $image_resize->save(public_path('base64/' .$base64Image));
+        $message->img_url = $base64Image;
+        return response()->json('Image uploaded successfully');
     }
 
 }

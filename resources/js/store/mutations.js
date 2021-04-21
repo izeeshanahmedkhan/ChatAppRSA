@@ -29,6 +29,6 @@ let mutations = {
     DELETE_MESSAGE(state, message) {
         let index = state.messages.findIndex(item => item.id === message.id)
         state.messages.splice(index, 1)
-    }
+    },
 }
 export default mutations

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
 
 Route::get('/', 'HomeController@home');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/image-upload','HomeController@imageUpload')->name('image-upload');
+
+Route::post('/image-store',[MessageController::class,'imageStore'])->name('image-store');

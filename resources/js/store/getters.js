@@ -19,7 +19,8 @@ let getters = {
     },
     newMessageMode: state => {
         return state.newMessageMode
-    }
+    },
+    image: state => { return state.image},
 }
 
 export default  getters

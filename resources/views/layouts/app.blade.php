@@ -60,7 +60,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href=""
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -81,5 +81,43 @@
             @yield('content')
         </main>
     </div>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    $(document).ready(function(){
+
+        $('#upload-image-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $('#image-input-error').text('');
+
+            $.ajax({
+                type:'POST',
+                url: `/image-store`,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                if (response) {
+                    this.reset();
+                    alert('Image has been uploaded successfully');
+                }
+            },
+                error: function(response){
+                console.log(response);
+                $('#image-input-error').text(response.responseJSON.errors.file);
+            }
+        });
+        });
+    });
+
+    </script>
 </body>
 </html>

@@ -24,6 +24,7 @@ let actions = {
     createMessage({commit}, message) {
         message.author = this.state.user
         message.recipient = this.state.selectedUser
+        message.image = this.state.image
         return axios.post('/api/messages', message)
             .then(res => {
                 commit('CREATE_MESSAGE', res.data)
